@@ -9,10 +9,6 @@ RUN apt-get install -y nodejs
 ARG PORT_FRONT
 EXPOSE $PORT_FRONT
 
-#ルート権限で操作するフォルダ /appを選択
-WORKDIR /app
-RUN npm install -g npm@9.8.0 http-server --save-dev nodemon
-
 # localhostでid $whoamiを実行しuidとgidの数値を事前に確認し.envファイルに転機すること。
 # localhostのユーザーと同一のuid・gidのユーザーを作成。
 # localhostとコンテナ内が同一ユーザー扱いとなりGitの監視が混乱しない。
@@ -26,9 +22,10 @@ RUN if ! grep -q ":x:$MY_GID:" /etc/group; then groupadd -g $MY_GID appgroup; fi
 # パスワード無しでroot権限をappuserにも付与する。
 RUN usermod -aG sudo appuser
 RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
-RUN mkdir /home/appuser/devcon 
+RUN mkdir /home/appuser/devcon
 # && chown appuser:appgroup /home/appuser/devcon
 #USER appuser
-WORKDIR /home/appuser/devcon
-#ENTRYPOINT ["/bin/sh", "-c"]
-#CMD ["tail -f /dev/null"]
+ARG NAME_FRONT
+WORKDIR /home/appuser/devcon/server/$NAME_FRONT
+# ENTRYPOINT ["/bin/sh", "-c"]
+# CMD ["tail -f /dev/null"]

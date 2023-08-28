@@ -14,10 +14,10 @@ services:
     volumes:
       - .:/home/appuser/devcon
     networks:
-      - hackathon_network
+      - step250_network
     ports:
       - ${PORT_FRONT}:${PORT_FRONT}
     command: ["/bin/sh", "-c", "/home/appuser/devcon/build.sh"]
     
 networks:
-  hackathon_network:
+  step250_network:
