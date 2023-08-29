@@ -25,7 +25,6 @@ RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 RUN mkdir /home/appuser/devcon
 # && chown appuser:appgroup /home/appuser/devcon
 #USER appuser
-ARG NAME_FRONT
-WORKDIR /home/appuser/devcon/server/$NAME_FRONT
+WORKDIR /home/appuser/devcon/server
 # ENTRYPOINT ["/bin/sh", "-c"]
 # CMD ["tail -f /dev/null"]
