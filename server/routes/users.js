@@ -1,8 +1,10 @@
 var express = require('express');
 var router = express.Router();
 
-router.get('/', function (req, res) {
-  res.render('users', { users: ['John', 'Jane', 'Jack'] });
+/* GET home page. */
+router.get('/', function (req, res, next) {
+  const username = req.query.username;
+  res.render('users', { title: 'Display User Name', users: { username: username } });
 });
 
 module.exports = router;

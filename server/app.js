@@ -16,8 +16,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.set('views', path.join(__dirname, 'views'));
-app.engine('html', require('ejs').renderFile);
-app.set('view engine', 'html');
+app.engine('html', require('ejs').renderFile);;
+app.set('view engine', 'ejs');
 
 app.use('/', (req, res, next) => {
   res.locals.baseUrl = process.env.BASE_URL || '';
@@ -36,7 +36,7 @@ app.use(function (err, req, res, next) {
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
   res.status(err.status || 500);
-  res.render('error');
+  res.render('error', { message: err.message, error: err });
 });
 
 var port = 3000;

@@ -7,6 +7,11 @@ async function submitForm() {
     },
     body: JSON.stringify({ username: username })
   });
-  const data = await response.json();
-  console.log(data);
+  if (response.ok) {
+    const data = await response.json();
+    console.log(data);
+    window.location.href = '/users?username=' + data.username;
+  } else {
+    console.error('Error:', response.statusText);
+  }
 }
