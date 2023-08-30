@@ -39,7 +39,7 @@ app.use(function (err, req, res, next) {
   res.render('error', { message: err.message, error: err });
 });
 
-var port = 3000;
+var port = process.env.PORT_FRONT || 3000;
 app.listen(port, () => {
   console.log('Server is running on port ' + port);
 });
