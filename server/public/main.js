@@ -19,39 +19,28 @@ async function submitForm() {
 
   if (response.ok) {
     const data = await response.json();
-
     var template = `
+    <ul class="flashes">
     <h2>登録情報</h2> 
-    <%= data.username %>
-    <%= data.email %>
+    <li><%= data.username %></li>
+    <li><%= data.email %></li>
+    </ul>
     `;
-
     const html = ejs.render(template, { data: data });
-    console.info(html);
+    // console.info(html);
     document.getElementById('output').innerHTML = html;
-
   } else {
+
+    const messages = [];
+    messages.push(response.statusText)
+    var template = `
+    <ul class="flashes">
+      <% for(var i=0; i<messages.length; i++) { %>
+      <li>Error: <%= messages[i] %></li>
+      <% } %>
+    </ul>`;
+    const html = ejs.render(template, { messages: messages });
+    document.getElementById('output').innerHTML = html;
     console.error('Error:', response.statusText);
   }
-
-  // if (response.ok) {
-  //   const data = await response.json();
-  //   console.log(data);
-
-  //   const messages = [data.username, data.email];
-  //   const template = document.getElementById('template').innerHTML;
-  //   const html = ejs.render(template, { messages });
-
-  //   document.getElementById('output').innerHTML = html;
-  // } else {
-  //   console.error('Error:', response.statusText);
-  // }
-  // if (response.ok) {
-  //   const data = await response.json();
-  //   console.log(data);
-  //   window.location.href = `/user?username=${data.username}&email=${data.email}`;
-
-  // } else {
-  //   console.error('Error:', response.statusText);
-  // }
 }
