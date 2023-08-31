@@ -3,7 +3,8 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-  res.render('insert', { title: 'User Registration', baseUrl: process.env.BASE_URL });
+  const errors = ['エラー1', 'エラー2'];
+  res.render('home', { title: 'ホーム画面', errors: errors });
 });
 
 module.exports = router;

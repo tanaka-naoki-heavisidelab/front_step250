@@ -4,8 +4,9 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 require('dotenv').config();
 
-var indexRouter = require('./routes/insert');
-var usersRouter = require('./routes/users');
+var homeRouter = require('./routes/home');
+var userRouter = require('./routes/user');
+var registerRouter = require('./routes/register');
 
 var app = express();
 
@@ -19,12 +20,13 @@ app.set('views', path.join(__dirname, 'views'));
 app.engine('html', require('ejs').renderFile);;
 app.set('view engine', 'ejs');
 
-app.use('/', (req, res, next) => {
+app.use('/', homeRouter);
+app.use('/home', homeRouter);
+app.use('/user', userRouter);
+app.use('/register', (req, res, next) => {
   res.locals.baseUrl = process.env.BASE_URL || '';
   next();
-}, indexRouter);
-
-app.use('/users', usersRouter);
+}, registerRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
