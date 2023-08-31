@@ -10,6 +10,8 @@
   <script>
     var baseUrl = '<%= baseUrl %>';
   </script>
+  <script src="https://cdn.jsdelivr.net/npm/ejs@3.1.9/ejs.min.js"></script>
+  <script src="/main.js"></script>
 </head>
 
 <body>
@@ -21,7 +23,28 @@
   <div>
     <button onclick="submitForm()">登録</button>
   </div>
-  <script src="/main.js"></script>
+
+  <!-- <% if (messages && messages.length) { %>
+      <ul class="flashes">
+        <% messages.forEach(function(message) { %>
+          <li>
+            <%= message %>
+          </li>
+          <% }); %>
+      </ul>
+      <% } %> -->
+
+  <!-- <script type="text/template" id="template">
+    <% if (messages && messages.length) { %>
+      <ul class="flashes">
+        <% messages.forEach(function(message) { %>
+          <li><%= message %></li>
+        <% }); %>
+      </ul>
+    <% } %>
+  </script> -->
+  <div id="output"></div>
+
 </body>
 
 </html>
