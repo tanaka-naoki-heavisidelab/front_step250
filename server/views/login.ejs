@@ -12,6 +12,7 @@
   </script>
   <script src="https://cdn.jsdelivr.net/npm/ejs@3.1.9/ejs.min.js"></script>
   <script src="/login.js"></script>
+  <script src="/templates.js"></script>
 </head>
 
 <body>
@@ -27,12 +28,12 @@
     </div>
     <main>
       <h2>ログインして下さい</h2>
-      <input type="text" id="email" placeholder="email">
+      <input type="text" id="username" placeholder="username">
       <input type="password" id="password" placeholder="Password">
       <div>
         <button onclick="submitForm()">ログイン</button>
       </div>
-      <div id="output"></div>
+      <div id="CLIENT_SIDE_RENDER"></div>
     </main>
   </div>
 </body>
