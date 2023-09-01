@@ -11,20 +11,32 @@
     var baseUrl = '<%= baseUrl %>';
   </script>
   <script src="https://cdn.jsdelivr.net/npm/ejs@3.1.9/ejs.min.js"></script>
-  <script src="/main.js"></script>
+  <script src="/register.js"></script>
 </head>
 
 <body>
-  <h2>登録して下さい</h2>
-  <input type="text" id="username" placeholder="Name">
-  <input type="text" id="email" placeholder="email">
-  <input type="text" id="password1" placeholder="passowrd">
-  <input type="text" id="password2" placeholder="もう一度同じpassword">
   <div>
-    <button onclick="submitForm()">登録</button>
+    <div>
+      <ul>
+        <li><a href="/home">ホーム</a></li>
+        <% if (typeof current_user !=='undefined' && current_user.is_authenticated) { %>
+          <li><a href="/logout">ログアウト</a></li>
+          <% } %>
+            <li><a href="/user">ユーザー画面</a></li>
+      </ul>
+    </div>
+    <main>
+      <h2>登録して下さい</h2>
+      <input type="text" id="username" placeholder="Name">
+      <input type="text" id="email" placeholder="email">
+      <input type="text" id="password1" placeholder="passowrd">
+      <input type="text" id="password2" placeholder="もう一度同じpassword">
+      <div>
+        <button onclick="submitForm()">登録</button>
+      </div>
+      <div id="output"></div>
+    </main>
   </div>
-  <div id="output"></div>
-
 </body>
 
 </html>

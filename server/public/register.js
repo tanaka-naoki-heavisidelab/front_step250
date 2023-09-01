@@ -30,17 +30,20 @@ async function submitForm() {
     // console.info(html);
     document.getElementById('output').innerHTML = html;
   } else {
-
+    const errorData = await response.json();
     const messages = [];
+    messages.push(response.status)
     messages.push(response.statusText)
+    messages.push(errorData.detail)
     var template = `
     <ul class="flashes">
       <% for(var i=0; i<messages.length; i++) { %>
-      <li>Error: <%= messages[i] %></li>
+      <li><%= messages[i] %></li>
       <% } %>
     </ul>`;
     const html = ejs.render(template, { messages: messages });
     document.getElementById('output').innerHTML = html;
-    console.error('Error:', response.statusText);
+    console.error(errorData.detail)
+
   }
 }

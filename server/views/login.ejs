@@ -7,6 +7,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ホーム画面</title>
   <link rel="stylesheet" href="/css/styles.css">
+  <script>
+    var baseUrl = '<%= baseUrl %>';
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/ejs@3.1.9/ejs.min.js"></script>
+  <script src="/login.js"></script>
 </head>
 
 <body>
@@ -20,13 +25,15 @@
             <li><a href="/user">ユーザー画面</a></li>
       </ul>
     </div>
-    <h1>ユーザー画面</h1>
-    <p>
-      <%= user.username %>
-    </p>
-    <p>
-      <%= user.email %>
-    </p>
+    <main>
+      <h2>ログインして下さい</h2>
+      <input type="text" id="username" placeholder="username">
+      <input type="password" id="password" placeholder="Password">
+      <div>
+        <button onclick="submitForm()">ログイン</button>
+      </div>
+      <div id="output"></div>
+    </main>
   </div>
 </body>
 
