@@ -1,13 +1,13 @@
 async function submitForm() {
-  const username = document.getElementById('username').value;
+  const email = document.getElementById('email').value;
   const password = document.getElementById('password').value;
 
   const response = await fetch(baseUrl + '/fast/token', {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/x-www-form-urlencoded'
+      'Content-Type': 'application/json'
     },
-    body: `username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`
+    body: JSON.stringify({ email: email, password: password })
   });
 
 
