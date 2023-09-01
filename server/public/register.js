@@ -17,33 +17,19 @@ async function submitForm() {
     })
   });
 
+  const messages = [];
   if (response.ok) {
     const data = await response.json();
-    var template = `
-    <ul class="flashes">
-    <h2>登録情報</h2> 
-    <li><%= data.username %></li>
-    <li><%= data.email %></li>
-    </ul>
-    `;
-    const html = ejs.render(template, { data: data });
-    // console.info(html);
-    document.getElementById('output').innerHTML = html;
+    messages.push("登録情報")
+    messages.push(data.username)
+    messages.push(data.email)
   } else {
     const errorData = await response.json();
-    const messages = [];
     messages.push(response.status)
     messages.push(response.statusText)
     messages.push(errorData.detail)
-    var template = `
-    <ul class="flashes">
-      <% for(var i=0; i<messages.length; i++) { %>
-      <li><%= messages[i] %></li>
-      <% } %>
-    </ul>`;
-    const html = ejs.render(template, { messages: messages });
-    document.getElementById('output').innerHTML = html;
     console.error(errorData.detail)
-
   }
+  const html = ejs.render(templates.spaTemplate, { messages: messages });
+  document.getElementById('CLIENT_SIDE_RENDER').innerHTML = html;
 }
