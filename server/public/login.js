@@ -12,15 +12,8 @@ async function submitForm() {
 
 
   if (response.ok) {
-    const data = await response.json()
-    console.log(data)
-  }
-
-  const messages = [];
-  if (response.ok) {
     const data = await response.json();
-    messages.push("ログイン成功")
-
+    console.log(data)
     // Save the token in the Cookie    
     // document.cookie = `userToken=${data.access_token}; Secure; HttpOnly; SameSite=Strict`;
     document.cookie = `userToken=${data.access_token};`
@@ -30,13 +23,13 @@ async function submitForm() {
     };
     window.location.href = '/home';
   } else {
+    const messages = [];
     const errorData = await response.json();
     messages.push(response.status)
     messages.push(response.statusText)
     messages.push(errorData.detail)
     console.error(errorData.detail)
+    const html = ejs.render(templates.spaTemplate, { messages: messages });
+    document.getElementById('CLIENT_SIDE_RENDER').innerHTML = html;
   }
-
-  const html = ejs.render(templates.spaTemplate, { messages: messages });
-  document.getElementById('CLIENT_SIDE_RENDER').innerHTML = html;
 }
