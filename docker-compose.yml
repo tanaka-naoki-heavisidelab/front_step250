@@ -20,3 +20,4 @@ services:
     
 networks:
   step250_network:
+    external: true
