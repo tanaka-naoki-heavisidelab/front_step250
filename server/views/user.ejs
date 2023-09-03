@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <%- include('header', {title: title}) %>
+</head>
+
+<body>
+  <div>
+    <%- include('base', {user: user}) %>
+      <main>
+        <div>
+          <h2>
+            ユーザー情報
+          </h2>
+          <%= user %>
+        </div>
+      </main>
+
+  </div>
+</body>
+
+</html>
