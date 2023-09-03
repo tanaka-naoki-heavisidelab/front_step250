@@ -11,36 +11,24 @@
 
 <body>
   <div>
-    <div>
-      <ul>
-        <li><a href="/home">ホーム</a></li>
-        <% if (user && user !=='error' ) { %>
-          <li><a href="/logout">ログアウト</a></li>
-          <% } %>
-            <li><a href="/user">ユーザー画面</a></li>
-      </ul>
-    </div>
-    <main>
-      <div>
-        <h2>
-          ログイン or ユーザー登録をして下さい
-        </h2>
-        <form>
-          <button>
-            <a href="/login">ログイン</a>
-          </button>
-          <button>
-            <a href="/register">登録</a>
-          </button>
-        </form>
-      </div>
-    </main>
+    <%- include('base', {user: user}) %>
+      <main>
+        <div>
+          <h2>
+            ログイン or ユーザー登録をして下さい
+          </h2>
+          <form>
+            <button>
+              <a href="/login">ログイン</a>
+            </button>
+            <button>
+              <a href="/register">登録</a>
+            </button>
+          </form>
+        </div>
+      </main>
 
-    <% if (user && user !=='error' ) { %>
-      <div>
-        現在、<%= user %> さんがログインしています。
-      </div>
-      <% } %>
+      <%- include('loginmsg', {user: user}) %>
 
   </div>
 </body>
