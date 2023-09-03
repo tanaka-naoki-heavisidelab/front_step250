@@ -1,6 +1,7 @@
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
+var createError = require('http-errors');
 var logger = require('morgan');
 require('dotenv').config();
 
@@ -26,6 +27,8 @@ app.use('/login', (req, res, next) => {
   res.locals.baseUrl = process.env.BASE_URL || '';
   next();
 }, require('./routes/login'));
+app.use('/logout', require('./routes/logout'));
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
