@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <%- include('header', {title: title}) %>
+    <script>
+      var baseUrl = '<%= baseUrl %>';
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/ejs@3.1.9/ejs.min.js"></script>
+    <script src="/detail.js"></script>
+    <script src="/templates.js"></script>
+</head>
+
+<body>
+  <div>
+    <%- include('base', {user: user}) %>
+      <main>
+        <div>
+          <div>
+            <h2>
+              {{ task.title }}
+            </h2>
+            <p>
+              {{ task.detail }}
+            </p>
+            <p>期限：<%= new Date(task.end_time).toISOString().split('T')[0] %>
+            </p>
+            <% if (new Date(task.end_time) < today) { %>
+              <button>
+                期限切れです！
+              </button>
+              <% } %>
+          </div>
+          <div>
+            <button>
+              <a href="/user">戻る</a>
+            </button>
+          </div>
+        </div>
+      </main>
+  </div>
+</body>
+
+</html>
+
+
+
+{% from "_formhelpers.html" import render_field %}
+{% extends 'base.html' %}
+
+{% block title %}タスク詳細画面{% endblock %}
+
+{% block content %}
+<main>
+  <div>
+    <h2>
+      {{ task.title }}
+    </h2>
+    <p>
+      {{ task.detail }}
+    </p>
+    <div>
+      <p>
+        期限：{{ task.end_time.date() }}
+      </p>
+      {% if task.end_time.date() < today %} <button>
+        期限切れです！
+        </button>
+        {% endif %}
+    </div>
+    <div>
+      <button>
+        <a href="/user">戻る</a>
+      </button>
+    </div>
+  </div>
+</main>
+{% endblock content %}

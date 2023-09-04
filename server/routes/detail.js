@@ -2,14 +2,15 @@ var express = require('express');
 const fetch = require('node-fetch');
 var router = express.Router();
 
-router.get('/', async function (req, res, next) {
+router.get('/:taskId', async function (req, res, next) {
   try {
     const userToken = req.cookies.userToken;
+    const taskId = req.params.taskId;
     const today = new Date();
     // nginx:80…コンテナ間のSSRなのでlocalhostは使えない。
     // backendとfrontendが共通のdocker networkで接続されている前提。
     if (userToken) {
-      const response = await fetch('http://nginx:80/fast/usertasks', {
+      const response = await fetch(`http://nginx:80/fast/usertask/${taskId}`, {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${userToken}`
@@ -18,18 +19,18 @@ router.get('/', async function (req, res, next) {
 
       if (response.ok) {
         const data = await response.json();
-        res.render('user',
+        res.render('detail',
           {
-            title: 'タスク一覧画面',
+            title: 'タスク詳細画面',
             baseUrl: process.env.BASE_URL,
             today: today,
             user: data.user,
-            tasks: data.tasks
+            tasks: data.task
           });
       } else {
-        res.render('user',
+        res.render('detail',
           {
-            title: 'タスク一覧画面',
+            title: 'タスク詳細画面',
             baseUrl: process.env.BASE_URL,
             today: today,
             user: "error",
@@ -37,9 +38,9 @@ router.get('/', async function (req, res, next) {
           });
       }
     } else {
-      res.render('user',
+      res.render('detail',
         {
-          title: 'タスク一覧画面',
+          title: 'タスク詳細画面',
           baseUrl: process.env.BASE_URL,
           today: today,
           user: null,
