@@ -15,20 +15,28 @@
               <a href="/create_task" role="button">新規作成</a>
             </button>
           </div>
-          <% tasks.forEach(task=> { %>
-            <div>
+          <%= user.username %> さんのタスク
+            <% tasks.forEach(task=> { %>
               <div>
-                <h2>
-                  <%= task.title %>
-                </h2>
+                <div>
+                  <h2>
+                    <%= task.title %>
+                      <p>期限：<%= new Date(task.end_time).toISOString().split('T')[0] %>
+                      </p>
+                      <% if (new Date(task.end_time) < today) { %>
+                        <button>
+                          期限切れです！
+                        </button>
+                        <% } %>
+                  </h2>
+                </div>
+                <div>
+                  <button><a href="/detail/<%= task.id %>" role="button">詳細</a></button>
+                  <button><a href="/update/<%= task.id %>" role="button">編集</a></button>
+                  <button><a href="/delete/<%= task.id %>" role="button">完了</a></button>
+                </div>
               </div>
-              <div>
-                <button><a href="/detail/<%= task.id %>" role="button">詳細</a></button>
-                <button><a href="/update/<%= task.id %>" role="button">編集</a></button>
-                <button><a href="/delete/<%= task.id %>" role="button">完了</a></button>
-              </div>
-            </div>
-            <% }) %>
+              <% }) %>
         </div>
       </main>
   </div>
