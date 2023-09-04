@@ -21,14 +21,9 @@ app.use('/', require('./routes/home'));
 app.use('/home', require('./routes/home'));
 app.use('/logout', require('./routes/logout'));
 app.use('/user', require('./routes/user'));
-app.use('/register', (req, res, next) => {
-  res.locals.baseUrl = process.env.BASE_URL || '';
-  next();
-}, require('./routes/register'));
-app.use('/login', (req, res, next) => {
-  res.locals.baseUrl = process.env.BASE_URL || '';
-  next();
-}, require('./routes/login'));
+app.use('/register', require('./routes/register'));
+app.use('/login', require('./routes/login'));
+app.use('/create_task', require('./routes/create_task'));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

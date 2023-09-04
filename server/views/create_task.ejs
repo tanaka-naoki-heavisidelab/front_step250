@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <%- include('header', {title: title}) %>
+    <script>
+      var baseUrl = '<%= baseUrl %>';
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/ejs@3.1.9/ejs.min.js"></script>
+    <script src="/create_task.js"></script>
+    <script src="/templates.js"></script>
+</head>
+
+<body>
+  <div>
+    <%- include('base', {user: user}) %>
+      <main>
+        <input type="text" id="title" placeholder="タスクのタイトル">
+        <textarea id="detail" placeholder="タスクの詳細" rows="5"></textarea>
+        <label for="end_time">終了予定日</label>
+        <input type="date" id="end_time" required>
+        <button onclick="submitForm()">作成</button>
+        <button><a href="/user" role="button">戻る</a></button>
+        <div id="CLIENT_SIDE_RENDER"></div>
+      </main>
+  </div>
+</body>
+
+</html>

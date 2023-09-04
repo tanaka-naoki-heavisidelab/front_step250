@@ -15,34 +15,28 @@ router.get('/', async function (req, res, next) {
       }
     });
 
-    const tasks = [];
-    tasks.push({ id: 1, title: "テストだよ", })
-
     if (response.ok) {
       const data = await response.json();
-      res.render('user',
+      res.render('create_task',
         {
-          title: 'タスク一覧画面',
+          title: 'タスク入力画面',
           baseUrl: process.env.BASE_URL,
-          user: data.username,
-          tasks: tasks
+          user: data.username
         });
     } else {
-      res.render('user',
+      res.render('create_task',
         {
-          title: 'タスク一覧画面',
+          title: 'タスク入力画面',
           baseUrl: process.env.BASE_URL,
-          user: "error",
-          tasks: tasks
+          user: "error"
         });
     }
   } else {
-    res.render('user',
+    res.render('create_task',
       {
-        title: 'タスク一覧画面',
+        title: 'タスク入力画面',
         baseUrl: process.env.BASE_URL,
-        user: null,
-        tasks: null
+        user: null
       });
   }
 });
