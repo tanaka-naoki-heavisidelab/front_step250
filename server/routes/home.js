@@ -3,30 +3,26 @@ const fetch = require('node-fetch');
 var router = express.Router();
 
 router.get(['/', '/home'], async function (req, res, next) {
-  try {
-    const userToken = req.cookies.userToken;
-    // nginx:80…コンテナ間のSSRなのでlocalhostは使えない。
-    // backendとfrontendが共通のdocker networkで接続されている前提。
-    if (userToken) {
-      const response = await fetch('http://nginx:80/fast/user', {
-        method: 'GET',
-        headers: {
-          'Authorization': `Bearer ${userToken}`
-        }
-      });
+  const userToken = req.cookies.userToken;
 
-      if (response.ok) {
-        const data = await response.json();
-        res.render('home', { title: 'ホーム画面', user: data.username });
-      } else {
-        res.render('home', { title: 'ホーム画面', user: "error" });
+  // nginx:80…コンテナ間のSSRなのでlocalhostは使えない。
+  // backendとfrontendが共通のdocker networkで接続されている前提。
+  if (userToken) {
+    const response = await fetch('http://nginx:80/fast/user', {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${userToken}`
       }
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      res.render('home', { title: 'ホーム画面', user: data.username });
     } else {
-      res.render('home', { title: 'ホーム画面', user: null });
+      res.render('home', { title: 'ホーム画面', user: "error" });
     }
-  } catch (error) {
-    console.error("Error occurred:", error);
-    res.status(500).send('Internal Server Error');
+  } else {
+    res.render('home', { title: 'ホーム画面', user: null });
   }
 });
 
