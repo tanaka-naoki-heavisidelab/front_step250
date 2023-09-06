@@ -17,14 +17,14 @@ router.get('/', async function (req, res, next) {
 
     if (response.ok) {
       const data = await response.json();
-      res.render('create_task',
+      res.render('create',
         {
           title: 'タスク入力画面',
           baseUrl: process.env.BASE_URL,
           user: data.username
         });
     } else {
-      res.render('create_task',
+      res.render('create',
         {
           title: 'タスク入力画面',
           baseUrl: process.env.BASE_URL,
@@ -32,7 +32,7 @@ router.get('/', async function (req, res, next) {
         });
     }
   } else {
-    res.render('create_task',
+    res.render('create',
       {
         title: 'タスク入力画面',
         baseUrl: process.env.BASE_URL,

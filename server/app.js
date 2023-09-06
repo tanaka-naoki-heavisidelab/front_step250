@@ -23,7 +23,7 @@ app.use('/logout', require('./routes/logout'));
 app.use('/user', require('./routes/user'));
 app.use('/register', require('./routes/register'));
 app.use('/login', require('./routes/login'));
-app.use('/create_task', require('./routes/create_task'));
+app.use('/create', require('./routes/create'));
 app.use('/detail', require('./routes/detail'));
 app.use('/delete', require('./routes/delete'));
 
