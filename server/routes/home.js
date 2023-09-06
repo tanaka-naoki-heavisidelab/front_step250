@@ -17,12 +17,12 @@ router.get(['/', '/home'], async function (req, res, next) {
 
     if (response.ok) {
       const data = await response.json();
-      res.render('home', { title: 'ホーム画面', user: data.username });
+      res.render('home', { title: 'ホーム画面', baseUrl: process.env.BASE_URL, user: data.username });
     } else {
-      res.render('home', { title: 'ホーム画面', user: "error" });
+      res.render('home', { title: 'ホーム画面', baseUrl: process.env.BASE_URL, user: "error" });
     }
   } else {
-    res.render('home', { title: 'ホーム画面', user: null });
+    res.render('home', { title: 'ホーム画面', baseUrl: process.env.BASE_URL, user: null });
   }
 });
 
