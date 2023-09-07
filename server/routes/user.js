@@ -33,17 +33,8 @@ router.get('/', async function (req, res, next) {
 
       if (response.ok) {
         const data = await response.json();
-        // res.render('user',
-        //   {
-        //     title: 'タスク一覧画面',
-        //     baseUrl: process.env.BASE_URL,
-        //     today: today,
-        //     user: data.user,
-        //     tasks: data.tasks
-        //   });
         res.render('user', overrideParams(defaultParams, { user: data.user, tasks: data.tasks }));
       } else {
-        // res.render('user', overrideParams(defaultParams, { user: "error" }));
         res.render('user', overrideParams(defaultParams, { user: "error", tasks: null }));
       }
     } else {

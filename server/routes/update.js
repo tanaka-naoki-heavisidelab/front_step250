@@ -33,32 +33,11 @@ router.get('/:taskId', async function (req, res, next) {
 
       if (response.ok) {
         const data = await response.json();
-        // res.render('update',
-        //   {
-        //     title: 'タスク編集画面',
-        //     baseUrl: process.env.BASE_URL,  
-        //     user: data.user,
-        //     task: data.task
-        //   });
         res.render('update', overrideParams(defaultParams, { user: data.user, task: data.task }));
       } else {
-        // res.render('update',
-        //   {
-        //     title: 'タスク編集画面',
-        //     baseUrl: process.env.BASE_URL,
-        //     user: "error",
-        //     task: null
-        //   });
         res.render('update', overrideParams(defaultParams, { user: "error" }));
       }
     } else {
-      // res.render('update',
-      //   {
-      //     title: 'タスク編集画面',
-      //     baseUrl: process.env.BASE_URL,
-      //     user: null,
-      //     task: null
-      //   });
       res.render('update', defaultParams);
     }
   } catch (error) {

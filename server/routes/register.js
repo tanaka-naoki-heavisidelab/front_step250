@@ -30,14 +30,11 @@ router.get('/', async function (req, res, next) {
 
       if (response.ok) {
         const data = await response.json();
-        // res.render('register', { title: 'ユーザー情報登録画面', baseUrl: process.env.BASE_URL, user: data.username });
         res.render('login', overrideParams(defaultParams, { user: data.username }));
       } else {
-        // res.render('register', { title: 'ユーザー情報登録画面', baseUrl: process.env.BASE_URL, user: "error" });
         res.render('register', overrideParams(defaultParams, { user: "error" }));
       }
     } else {
-      // res.render('register', { title: 'ユーザー情報登録画面', baseUrl: process.env.BASE_URL, user: null });
       res.render('register', defaultParams);
     }
 

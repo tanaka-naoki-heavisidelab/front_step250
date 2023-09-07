@@ -1,11 +1,11 @@
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var createError = require('http-errors');
-var logger = require('morgan');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const createError = require('http-errors');
+const logger = require('morgan');
 require('dotenv').config();
 
-var app = express();
+const app = express();
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -41,7 +41,7 @@ app.use(function (err, req, res, next) {
   res.render('error', { message: err.message, error: err });
 });
 
-var port = process.env.PORT_FRONT || 3000;
+const port = process.env.PORT_FRONT || 3000;
 app.listen(port, () => {
   console.log('Server is running on port ' + port);
 });

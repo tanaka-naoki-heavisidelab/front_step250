@@ -30,14 +30,11 @@ router.get('/', async function (req, res, next) {
 
       if (response.ok) {
         const data = await response.json();
-        // res.render('login', { title: 'ログイン画面', baseUrl: process.env.BASE_URL, user: data.username });
         res.render('login', overrideParams(defaultParams, { user: data.username }));
       } else {
-        // res.render('login', { title: 'ログイン画面', baseUrl: process.env.BASE_URL, user: "error" });
         res.render('login', overrideParams(defaultParams, { user: "error" }));
       }
     } else {
-      // res.render('login', { title: 'ログイン画面', baseUrl: process.env.BASE_URL, user: null });
       res.render('login', defaultParams);
     }
   } catch (error) {

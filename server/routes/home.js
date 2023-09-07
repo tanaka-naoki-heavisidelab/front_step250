@@ -30,10 +30,8 @@ router.get(['/', '/home'], async function (req, res, next) {
 
       if (response.ok) {
         const data = await response.json();
-        // res.render('home', { title: 'ホーム画面', baseUrl: process.env.BASE_URL, user: data.username });
         res.render('home', overrideParams(defaultParams, { user: data.username }));
       } else {
-        // res.render('home', { title: 'ホーム画面', baseUrl: process.env.BASE_URL, user: "error" });
         res.render('home', overrideParams(defaultParams, { user: "error" }));
       }
     } else {
