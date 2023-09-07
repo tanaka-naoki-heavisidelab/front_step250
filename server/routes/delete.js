@@ -1,9 +1,8 @@
-var express = require('express');
+const express = require('express');
 const fetch = require('node-fetch');
-var router = express.Router();
+const router = express.Router();
 
 router.get('/:taskId', async function (req, res, next) {
-  console.log("delete");
   try {
     const userToken = req.cookies.userToken;
     const taskId = req.params.taskId;
