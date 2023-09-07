@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <%- include('header', {title: title, baseUrl: baseUrl}) %>
+    <script src="https://cdn.jsdelivr.net/npm/ejs@3.1.9/ejs.min.js"></script>
+    <script src="/get_today.js" defer></script>
+    <script src="/update.js"></script>
+    <script src="/templates.js"></script>
+</head>
+
+<body>
+  <div>
+    <%- include('base', {user: user}) %>
+      <main>
+        <label for="title">タイトル</label>
+        <input type="text" id="title" placeholder="タスクのタイトル" value="<%= task.title %>">
+        <label for="detail">詳細</label>
+        <textarea id="detail" placeholder="タスクの詳細" rows="5"><%= task.detail %></textarea>
+        <label for="end_time">終了予定日</label>
+        <input type="date" id="end_time" value="<%= new Date(task.end_time).toISOString().split('T')[0] %>" required>
+        <button onclick="submitForm(<%= task.id %>)">更新</button>
+        <button><a href="/user" role="button">戻る</a></button>
+        <div id="CLIENT_SIDE_RENDER"></div>
+      </main>
+  </div>
+</body>
+
+</html>
