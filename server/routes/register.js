@@ -1,13 +1,7 @@
 const express = require('express');
 const fetch = require('node-fetch');
 const router = express.Router();
-
-function overrideParams(params, newValues) {
-  return {
-    ...params,
-    ...newValues
-  };
-}
+const { overrideParams } = require('../utils/common.js');
 
 router.get('/', async function (req, res, next) {
   try {
