@@ -27,6 +27,7 @@ app.use('/create', require('./routes/create'));
 app.use('/detail', require('./routes/detail'));
 app.use('/delete', require('./routes/delete'));
 app.use('/update', require('./routes/update'));
+app.use('/webflow', require('./routes/webflow'));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
