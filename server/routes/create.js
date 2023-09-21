@@ -19,7 +19,8 @@ router.get('/', async function (req, res, next) {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${userToken}`
-        }
+        },
+        credentials: 'include'
       });
 
       if (response.ok) {

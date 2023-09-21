@@ -21,8 +21,9 @@ router.get('/', async function (req, res, next) {
       const response = await fetch('http://nginx:80/fast/usertasks', {
         method: 'GET',
         headers: {
-          'Authorization': `Bearer ${userToken}`
-        }
+          'accept': 'application/json'
+        },
+        credentials: 'include'
       });
 
       if (response.ok) {

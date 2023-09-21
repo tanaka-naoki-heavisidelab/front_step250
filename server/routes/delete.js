@@ -10,8 +10,9 @@ router.get('/:taskId', async function (req, res, next) {
       const response = await fetch(`http://nginx:80/fast/usertask/delete/${taskId}`, {
         method: 'GET',
         headers: {
-          'Authorization': `Bearer ${userToken}`
-        }
+          'accept': 'application/json'
+        },
+        credentials: 'include'
       });
 
       if (response.ok) {
