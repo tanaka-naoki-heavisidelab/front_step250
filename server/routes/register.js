@@ -30,7 +30,7 @@ router.get('/', async function (req, res, next) {
 
     if (response.ok) {
       const data = await response.json();
-      res.render('login', overrideParams(defaultParams, { user: data.username }));
+      res.render('register', overrideParams(defaultParams, { user: data.username }));
     } else {
       res.render('register', defaultParams);
     }

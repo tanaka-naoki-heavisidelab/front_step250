@@ -3,17 +3,13 @@ async function submitForm() {
   const detail = document.getElementById('detail').value;
   const end_time = document.getElementById('end_time').value + "T00:00:00";
 
-  const token = document.cookie
-    .split('; ')
-    .find(row => row.startsWith('userToken='))
-    .split('=')[1];
 
   const response = await fetch(`${baseUrl}/fast/task`, {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + token
+      'Content-Type': 'application/json'
     },
+    credentials: 'include',
     body: JSON.stringify({
       title: title,
       detail: detail,
