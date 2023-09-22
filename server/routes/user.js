@@ -5,7 +5,7 @@ const { overrideParams } = require('../utils/common.js');
 
 router.get('/', async function (req, res, next) {
   try {
-    const userToken = req.cookies.userToken;
+
     const today = new Date();
     const defaultParams = {
       title: 'タスク一覧画面',
@@ -15,23 +15,25 @@ router.get('/', async function (req, res, next) {
       tasks: null
     };
 
-    if (userToken) {
-      // nginx:80…コンテナ間のSSRなのでlocalhostは使えない。
-      // backendとfrontendが共通のdocker networkで接続されている前提。
-      const response = await fetch('http://nginx:80/fast/usertasks', {
-        method: 'GET',
-        headers: {
-          'accept': 'application/json'
-        },
-        credentials: 'include'
-      });
+    const headers = {
+      'accept': 'application/json'
+    };
 
-      if (response.ok) {
-        const data = await response.json();
-        res.render('user', overrideParams(defaultParams, { user: data.user, tasks: data.tasks }));
-      } else {
-        res.render('user', overrideParams(defaultParams, { user: "error", tasks: null }));
-      }
+    if (req.cookies && req.cookies.access_token) {
+      headers['Cookie'] = 'access_token=' + req.cookies.access_token;
+    }
+
+    // FastAPIのエンドポイントを呼び出す
+    // nginx:80…コンテナ間のSSRなのでlocalhostは使えない。
+    // backendとfrontendが共通のdocker networkで接続されている前提。
+    const response = await fetch('http://nginx:80/fast/usertasks', {
+      method: 'GET',
+      headers: headers
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      res.render('user', overrideParams(defaultParams, { user: data.user, tasks: data.tasks }));
     } else {
       res.render('user', defaultParams);
     }

@@ -1,24 +1,3 @@
-
-// /fast/tokenは成功した。
-// async function submitForm() {
-//   const username = document.getElementById('username').value;
-//   const password = document.getElementById('password').value;
-
-//   const response_1st = await fetch(baseUrl + '/fast/token', {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/x-www-form-urlencoded'
-//     },
-//     body: `username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`
-//   });
-//   if (response_1st.ok) {
-//     window.location.href = '/home';
-//   } else {
-//     displayError(response_1st);
-//   }
-// }
-
-
 async function submitForm() {
   const username = document.getElementById('username').value;
   const password = document.getElementById('password').value;
@@ -49,7 +28,6 @@ async function submitForm() {
     displayError(response_1st);
   }
 }
-
 
 function displayError(response) {
   // Handle errors: extract the message from the response and display it to the user

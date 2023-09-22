@@ -4,7 +4,7 @@ async function submitForm() {
   const password1 = document.getElementById('password1').value;
   const password2 = document.getElementById('password2').value;
 
-  const response = await fetch(baseUrl + '/fast/register', {
+  const response = await fetch(`${baseUrl}/fast/register`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'

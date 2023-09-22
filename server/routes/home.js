@@ -17,7 +17,7 @@ router.get(['/', '/home'], async function (req, res, next) {
     };
 
     if (req.cookies && req.cookies.access_token) {
-      headers['Authorization'] = 'Bearer ' + req.cookies.access_token;
+      headers['Cookie'] = 'access_token=' + req.cookies.access_token;
     }
 
     // FastAPIのエンドポイントを呼び出す
@@ -27,21 +27,6 @@ router.get(['/', '/home'], async function (req, res, next) {
       method: 'GET',
       headers: headers
     });
-
-    // console.log("Response Status:", response.status);
-    // console.log("Response Status Text:", response.statusText);
-
-    // for (let [key, value] of response.headers.entries()) {
-    //   console.log(key, value);
-    // }
-
-    // if (response.headers.get('content-type').includes('application/json')) {
-    //   const data = await response.json();
-    //   console.log("Response Body:", data);
-    // } else {
-    //   const text = await response.text();
-    //   console.log("Response Body:", text);
-    // }
 
     if (response.ok) {
       const data = await response.json();

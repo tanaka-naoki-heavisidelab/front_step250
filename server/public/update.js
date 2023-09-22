@@ -8,7 +8,7 @@ async function submitForm(task_id) {
     .find(row => row.startsWith('userToken='))
     .split('=')[1];
 
-  const response = await fetch(baseUrl + `/fast/updatetask/${task_id}`, {
+  const response = await fetch(`${baseUrl}/fast/updatetask/${task_id}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
